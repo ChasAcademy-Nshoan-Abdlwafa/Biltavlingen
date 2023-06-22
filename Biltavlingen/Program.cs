@@ -34,7 +34,7 @@ namespace Biltavlingen
 
             int placement = 0;
 
-            while (carRaces.Count > 0)
+            while (carRaces.Count > 0) // while-loop that checks placements, once both cars has received placements the race is considered finished
             {
                 Task finishedTask = await Task.WhenAny(carRaces);
                 if (finishedTask == carRace1)
@@ -57,6 +57,44 @@ namespace Biltavlingen
             }
         }
 
+        public async static Task RaceStatus(List<Car> cars) // checks the current status of the car
+        {
+            while (true)
+            {
+                DateTime start = DateTime.Now;
 
+                bool gotKey = false;
+
+                while ((DateTime.Now - start).TotalSeconds < 2)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        gotKey = true;
+                        break;
+                    }
+                }
+
+                if (gotKey)
+                {
+                    Console.WriteLine("");
+                    Console.ReadKey();
+                    cars.ForEach(car =>
+                    {
+                        string currentDistance = car.car_currentDistance.ToString("0");
+                        Console.WriteLine($"{car.car_name} has driven {currentDistance} meters and is currently driving at the speed of {car.car_speed} km/h!");
+                    });
+                    gotKey = false;
+                }
+
+                await Task.Delay(10);
+
+                var remainingDistance = cars.Select(car => car.car_currentDistance).Sum();
+
+                if (remainingDistance > 30000m)
+                {
+                    return;
+                }
+            }
+        }
     }
 }
