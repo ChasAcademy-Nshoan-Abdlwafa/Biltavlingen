@@ -31,6 +31,32 @@ namespace Biltavlingen
             var carRaceStatus = RaceStatus(new List<Task> { Car1, Car2 });
 
             var carRaces = new List<Task> { new carRace1, carRace2, carRaceStatus };
+
+            int placement = 0;
+
+            while (carRaces.Count > 0)
+            {
+                Task finishedTask = await Task.WhenAny(carRaces);
+                if (finishedTask == carRace1)
+                {
+                    placement += 1;
+                    PrintPlacement(Car1, placement);
+                }
+                else if (finishedTask == carRace2)
+                {
+                    placement += 1;
+                    Printplacement(Car2, placement);
+                }
+                else if (placement == 2)
+                {
+                    Console.WriteLine("The race has finished!");
+                }
+
+                await finishedTask
+                CarRaces.Remove(finishedTask);
+            }
         }
+
+
     }
 }
