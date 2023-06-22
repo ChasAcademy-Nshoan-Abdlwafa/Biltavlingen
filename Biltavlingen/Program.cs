@@ -49,7 +49,7 @@ namespace Biltavlingen
                 }
                 else if (placement == 2)
                 {
-                    Console.WriteLine("The race has finished!");
+                    Console.WriteLine("\nThe race has finished!");
                 }
 
                 await finishedTask;
@@ -103,7 +103,7 @@ namespace Biltavlingen
                     cars.ForEach(car =>
                     {
                         string currentDistance = car.car_currentDistance.ToString("0");
-                        Console.WriteLine($"{car.car_name} has driven {currentDistance} meters and is currently driving at the speed of {car.car_speed} km/h!");
+                        Console.WriteLine($"\n{car.car_name} has driven {currentDistance} meters and is currently driving at the speed of {car.car_speed} km/h!");
                     });
                     gotKey = false;
                 }
@@ -127,26 +127,27 @@ namespace Biltavlingen
         public static void Event(Car car) // random events that affects the cars
         {
             Random random = new Random();
-            int eventChance = random.Next(50);
+            int eventChance = random.Next(1, 50);
+
             if (eventChance == 1)
             {
-                Console.WriteLine($"{car.car_name} has no gas left! Refueling will take 30 seconds.");
+                Console.WriteLine($"\n{car.car_name} has no gas left! Refueling will take 30 seconds.");
                 car.car_delay += 30;
             }
-            else if (eventChance == 2)
+            else if (eventChance <= 2)
             {
-                Console.WriteLine($"One of {car.car_name}'s tires has flattened! Replacing the tire will take 20 seconds.");
+                Console.WriteLine($"\nOne of {car.car_name}'s tires has flattened! Replacing the tire will take 20 seconds.");
                 car.car_delay += 20;
             }
-            else if ( eventChance == 5)
+            else if ( eventChance <= 5)
             {
-                Console.WriteLine($"A bird has hit the windshield of {car.car_name}, how unfortunate! Cleaning the windshield will take 10 seconds.");
+                Console.WriteLine($"\nA bird has hit the windshield of {car.car_name}, how unfortunate! Cleaning the windshield will take 10 seconds.");
                 car.car_delay += 10;
             }
-            else if ( eventChance == 10)
+            else if ( eventChance <= 10)
             {
                 car.car_speed = car.car_speed - 1;
-                Console.WriteLine($"There is something wrong with {car.car_name}'s engine! Its speed will go down with {car.car_speed} km/h.");
+                Console.WriteLine($"\nThere is something wrong with {car.car_name}'s engine! Its speed has slowed down to {car.car_speed} km/h.");
             }
             else
             {
@@ -154,7 +155,7 @@ namespace Biltavlingen
             }
         }
 
-        public static void PrintPlacement(Car car, int placement) // shows the placements that the cars finished with
+        public static void PrintPlacement(Car car, int placement) // prints out the placements that the cars finished with
         {
             if (placement == 1)
             {
