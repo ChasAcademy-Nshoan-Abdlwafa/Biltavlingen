@@ -10,7 +10,7 @@ namespace Biltavlingen
     {
         public string? car_name {  get; set; }
         public decimal car_speed { get; set; }
-        public int car_currentDistance { get; set; }
+        public decimal car_currentDistance { get; set; }
         public int car_delay { get; set; }
     }
 }

@@ -96,5 +96,27 @@ namespace Biltavlingen
                 }
             }
         }
+
+        public async static Task<Car> RaceStart(Car car)
+        {
+            int timeCalc = 30;
+            while (true)
+            {
+                await Wait();
+                car.car_currentDistance += (((car.car_speed * 1000) * timeCalc / 3600m));
+                Event(car);
+
+                if (car.car_delay > 0)
+                {
+                    await Wait(car.car_delay);
+                    car.car_delay = 0;
+                }
+
+                if (car.car_currentDistance >= 10000m)
+                {
+                    return car;
+                }
+            }
+        }
     }
 }
