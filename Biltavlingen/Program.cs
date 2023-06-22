@@ -45,7 +45,7 @@ namespace Biltavlingen
                 else if (finishedTask == carRace2)
                 {
                     placement += 1;
-                    Printplacement(Car2, placement);
+                    PrintPlacement(Car2, placement);
                 }
                 else if (placement == 2)
                 {
@@ -147,6 +147,16 @@ namespace Biltavlingen
             {
                 car.car_delay = 0;
             }
+        }
+
+        public async static Task Wait(int delay = 1)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(delay));
+        }
+
+        public static void PrintPlacement(Car car, int placement) // shows the placements that the cars finished with
+        {
+            Console.WriteLine($"{car.car_name} has successfully completed the race and finished with the placement of {placement}.");
         }
     }
 }
