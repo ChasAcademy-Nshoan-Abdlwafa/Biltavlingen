@@ -10,7 +10,7 @@ namespace Biltavlingen
         {
             Console.WriteLine("Welcome to the race! Press any key to start!");
             Console.ReadKey();
-            Console.WriteLine("\nThe race has begun! Press any key to receive an update on the current race status!");
+            Console.WriteLine("\nThe race has begun! Press any key to receive an update on the current status of the race!");
 
             Car Car1 = new Car
             {
@@ -98,12 +98,12 @@ namespace Biltavlingen
 
                 if (gotKey)
                 {
-                    Console.WriteLine("");
+                    Console.WriteLine("\nStatus check: ");
                     Console.ReadKey();
                     cars.ForEach(car =>
                     {
                         string currentDistance = car.car_currentDistance.ToString("0");
-                        Console.WriteLine($"\n{car.car_name} has driven {currentDistance} meters and is currently driving at the speed of {car.car_speed} km/h!");
+                        Console.WriteLine($"{car.car_name} has reached {currentDistance} meters so far and is currently driving at the speed of {car.car_speed} km/h!");
                     });
                     gotKey = false;
                 }
