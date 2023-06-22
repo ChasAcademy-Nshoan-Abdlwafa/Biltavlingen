@@ -119,7 +119,7 @@ namespace Biltavlingen
             }
         }
 
-        public async static Task Wait(int delay = 1)
+        public async static Task Wait(int delay = 30)
         {
             await Task.Delay(TimeSpan.FromSeconds(delay));
         }
