@@ -1,6 +1,6 @@
-﻿using Car;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using static Biltavlingen.Car;
 
 namespace Biltavlingen
 {
@@ -8,35 +8,29 @@ namespace Biltavlingen
     {
         static async Task Main(string[] args)
         {
-            await StartRace();
-        }
+            Console.WriteLine("Welcome to the race! Press any key to start!");
+            Console.ReadKey();
+            Console.WriteLine("The race has begun! Press any key to receive an update on the current race status!");
 
-        public static async Task StartRace()
-        {
-            Console.WriteLine("Welcome! Press any key to start the race.");
-            Console.ReadLine();
-
-            Car Car1 = new Car
+            Car Car1 = new Car();
             {
-                car_id = 1,
                 car_name = "Car #1",
-                car_speed = 100,
-                car_distance = 0
+                car_speed = 120,
+                car_currentDistance = 0
             };
 
-            Car Car2 = new Car
+            Car Car2 = new Car();
             {
-                car_id = 2,
                 car_name = "Car #2",
-                car_speed = 100,
-                car_distance = 0
+                car_speed = 120,
+                car_currentDistance = 0
             };
 
-            var carRace1 = CarRace(Car1);
-            var carRace2 = CarRace(Car2);
-            var carRaceStatus = CarStatus(new List<Car> { Car1, Car2 });
+            var carRace1 = RaceStart(Car1);
+            var carRace2 = RaceStart(Car2);
+            var carRaceStatus = RaceStatus(new List<Task> { Car1, Car2 });
 
-            var carRaces = new List<Task> { carRace1, carRace2, carRaceStatus };
+            var carRaces = new List<Task> { new carRace1, carRace2, carRaceStatus };
         }
     }
 }
