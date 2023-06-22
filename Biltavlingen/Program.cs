@@ -57,6 +57,28 @@ namespace Biltavlingen
             }
         }
 
+        public async static Task<Car> RaceStart(Car car)
+        {
+            int timeCalc = 30;
+            while (true)
+            {
+                await Wait();
+                car.car_currentDistance += (((car.car_speed * 1000) * timeCalc / 3600m));
+                Event(car);
+
+                if (car.car_delay > 0)
+                {
+                    await Wait(car.car_delay);
+                    car.car_delay = 0;
+                }
+
+                if (car.car_currentDistance >= 10000m)
+                {
+                    return car;
+                }
+            }
+        }
+
         public async static Task RaceStatus(List<Car> cars) // checks the current status of the car
         {
             while (true)
@@ -97,26 +119,9 @@ namespace Biltavlingen
             }
         }
 
-        public async static Task<Car> RaceStart(Car car)
+        public async static Task Wait(int delay = 1)
         {
-            int timeCalc = 30;
-            while (true)
-            {
-                await Wait();
-                car.car_currentDistance += (((car.car_speed * 1000) * timeCalc / 3600m));
-                Event(car);
-
-                if (car.car_delay > 0)
-                {
-                    await Wait(car.car_delay);
-                    car.car_delay = 0;
-                }
-
-                if (car.car_currentDistance >= 10000m)
-                {
-                    return car;
-                }
-            }
+            await Task.Delay(TimeSpan.FromSeconds(delay));
         }
 
         public static void Event(Car car) // random events that affects the cars
@@ -147,11 +152,6 @@ namespace Biltavlingen
             {
                 car.car_delay = 0;
             }
-        }
-
-        public async static Task Wait(int delay = 1)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(delay));
         }
 
         public static void PrintPlacement(Car car, int placement) // shows the placements that the cars finished with
